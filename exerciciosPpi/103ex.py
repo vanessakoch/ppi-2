@@ -24,14 +24,19 @@ palindrome_four = 'caneta azul'
 
 # 1
 
-print(book1[:9])
-print(book2[:11])
-print(book3[:6])
+quebra1 = book1.split('by')
+quebra2 = book2.split('by')
+quebra3 = book3.split('by')
+
+print(quebra1[0])
+print(quebra2[0])
+print(quebra3[0])
+
 
 # 2
-titulo1 = book1[:9]
-titulo2 = book2[:11]
-titulo3 = book3[:6]
+titulo1 = quebra1[0]
+titulo2 = quebra2[0]
+titulo3 = quebra3[0]
 
 # 3
 tamanhoBook1 = len(titulo1)
@@ -42,8 +47,14 @@ tamanhoBook3 = len(titulo3)
 print(tamanhoBook3)
 
 # 4
-msg = 'Hi, {1} {0}!'.format(titulo1, titulo2)
-print(msg)
+quebra1 = book1.split(', ')
+ano = quebra1[1]
+
+quebra2 = book1.split('by')
+titulo = quebra2[0]
+autor = book1[13:30]
+
+print("{} - {} , {} ".format(titulo, autor, ano)) 
 
 # 5
 
