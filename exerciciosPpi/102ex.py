@@ -50,9 +50,12 @@ print(type(weekdays[0]))
 
 # Como separar 'wed' até 'fri'?
 
+print(days_list[2:5])
+
 # Quais as maneiras de selecionar 'fri' por indice?
 
 print(weekdays[4])
+print(days_list[4:5])
 
 # Qual eh o tamanho dos dias e days_list?
 
@@ -70,11 +73,11 @@ print(list)
 
 # Como limpar list?
 
-# list.clear()
+# R: list.clear()
 
 # Como deletar list?
 
-# del(list)
+# R: del(list)
 
 # Como atribuir o ultimo elemento de list na variavel ultimo_elemento e remove-lo de list?
 
