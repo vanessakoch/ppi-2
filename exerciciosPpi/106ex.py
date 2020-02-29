@@ -1,38 +1,8 @@
 #!/usr/bin/python3
 
-## DICTIONARIES (dicts)
-
-# Os dicts são vetores associativos, tambem conhecidos como maps
-
-# Dicionarios sao semelhantes as listas:
-# - ambos podem conter tipos de dados variados
-# - ambos sao iteraveis
-# - ambos sao mutaveis
-
-# Dicts sao diferentes das listas:
-# - dicionarios nao sao ordenados. A ordem nao eh preservada e nao eh importante para essa estrutura de dados
-# - o tempo de busca no dicionarioe constante (O(1)), independentemente do tamanho do dicionario
-
-# Dicts são como dicionarios reais:
-# - os dicts são feitos de pares 'chave':valor
-# - as chaves do dicts devem ser unicas
-# - a chave serve para procurar o valor, mas não o contrário
-
-# Apenas uma funcao vazia. Voce ira implementa-la futuramente :p
-# LER PEP 257
-def define_default_city(state):
-	''' Define a capital do estado de origem como city_origin para um professor existente no arquivo. Retorna True se a capital do estado de origem existe no arquivo capitais-BR.csv e False, caso contrario.
-
-	Keyword arguments:
-		state -- O estado de origem do professor
-	'''
-	pass
-
-## Exemplos
-
+#
 professor1 = {'id': 42, 'name': 'Alexandre Abreu', 'age': 30, 'state_origin': 'Minas Gerais', 'courses': ['Inteligência Artificial', 'Mineração de Dados', 'Programação para Internet I', 'Programação para Internet II']}
 print(type(professor1))
-print(professor1)
 
 # Tamanho
 print(len(professor1))
@@ -49,12 +19,10 @@ print(professor2['courses'][0])
 # Utilizando construtor
 professor3 = dict(id=28, name='Jorge Armino', idade=37)
 print(type(professor3))
-print(professor3)
 
 # adicionando chave e valor em um dict jah existente
 professor3['state_origin'] = 'Rio Grande do Sul'
 professor3['courses'] = ['Filosofia', 'Informática e Sociedade']
-print(professor3)
 
 # Acessar um valor em um dict
 print(professor1['state_origin'])
@@ -98,52 +66,53 @@ for key, value in professor2.items():
 
 # Remove chave:valor do dict usando pop(chave)
 courses = professor3.pop('courses')
-print(professor3)
 print(courses)
-
 
 ###
 ## Exercicios
-###
-
 
 # 1) Implemente o metodo define_default_city de acordo com a docstring definida no inicio da funcao.
 #Utilize a clausula else no loop implementado.
-# 2) Remova do arquivo capitais-BR.csv todas capitais dos estados do sudeste e teste se sua funcao estah
-#robusta o suficiente.
-# 3) Faca uma funcao que le o arquivo lista-cpf.txt, retorne a quantidade de CPF unicos (sem repeticao)
-#e os escreva em um arquivo lista-cpf-unicos.txt. Eh necessario descompactar o arquivo lista-cpf.txt.tar.gz
-#primeiro.
-
-#01
 
 #''' Define a capital do estado de origem como city_origin para um professor existente no arquivo.
 #Retorna True se a capital do estado de origem existe no arquivo capitais-BR.csv e False, caso contrario.
 
-#Keyword arguments:
-#	state -- O estado de origem do professor
-#'''
-
 
 def define_default_city(state):
-    try:
-        arquivo = open('capitais-BR.csv', 'r')
-        for line in arquivo.readlines():
-            print(line)
-            if state in line:
-                print(line)
-                professor1['city_origin'] = 'aa'
-                return True
-                break
-            else:
-                return False
-                break
+	arquivo = open('capitais-BR.csv', 'r')
+	for linha in arquivo:
+		if state in linha:
+			capital = linha.split(';')
+			professor1['city_origin'] = capital[1]
+			return True
+	return False
+	arquivo.close()
 
-    except FileNotFoundError:
-        arquivo = open('capitais-BR.csv', 'r')
-    arquivo.close()
-
-
-
-define_default_city(professor1['state_origin'])
+print(define_default_city(professor1['state_origin']))
 print(professor1)
+
+# 2) Remova do arquivo capitais-BR.csv todas capitais dos estados do sudeste e teste se sua funcao estah
+#robusta o suficiente.
+
+def ler_arq():
+	arquivo = open('capitais-BR.csv', 'r')
+	conteudo = arquivo.read()
+	return conteudo
+
+def remove_capital_sudeste():
+	for linha in open('capitais-BR.csv', 'r'):
+		quebra = linha.split(';')
+		state = quebra[0]
+		if(state == 'São Paulo' or state == 'Minas Gerais' or state == 'Espírito Santo' or state == 'Rio de Janeiro'):
+			conteudo = ler_arq()
+			arquivo = open('capitais-BR.csv', 'w')
+			capital = linha.split(';')
+			conteudo = conteudo.replace(capital[1], '\n')
+			arquivo.write(conteudo)
+			arquivo.close()
+
+remove_capital_sudeste()
+
+# 3) Faca uma funcao que le o arquivo lista-cpf.txt, retorne a quantidade de CPF unicos (sem repeticao)
+#e os escreva em um arquivo lista-cpf-unicos.txt. Eh necessario descompactar o arquivo lista-cpf.txt.tar.gz
+#primeiro.
