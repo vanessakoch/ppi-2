@@ -45,8 +45,8 @@ def ler_arq():
 def remove_capital_sudeste():
 	for linha in open('capitais-BR.csv', 'r'):
 		quebra = linha.split(';')
-		state = quebra[0]
-		if(state == 'São Paulo' or state == 'Minas Gerais' or state == 'Espírito Santo' or state == 'Rio de Janeiro'):
+		state = quebra[0].lower()
+		if(state == 'são paulo' or state == 'minas gerais' or state == 'espírito santo' or state == 'rio de janeiro'):
 			conteudo = ler_arq()
 			arquivo = open('capitais-BR.csv', 'w')
 			capital = linha.split(';')
@@ -59,3 +59,20 @@ remove_capital_sudeste()
 # 3) Faca uma funcao que le o arquivo lista-cpf.txt, retorne a quantidade de CPF unicos (sem repeticao)
 #e os escreva em um arquivo lista-cpf-unicos.txt. Eh necessario descompactar o arquivo lista-cpf.txt.tar.gz
 #primeiro.
+
+def cpfUnique():
+        listaCpf = []
+
+        for i in open('lista-cpf.txt', 'r'):
+                listaCpf.append(i)
+                
+        lista_unica = [i for n, i in enumerate(listaCpf) if i not in listaCpf[n + 1:]]
+         
+        arquivo = open('lista-cpf-unicos.txt', 'w')
+        for unico in lista_unica:
+                arquivo.write(unico + "\n")
+        
+        arquivo.close()
+         
+
+cpfUnique()
