@@ -65,14 +65,14 @@ def cpfUnique():
 
         for i in open('lista-cpf.txt', 'r'):
                 listaCpf.append(i)
-                
+
         lista_unica = [i for n, i in enumerate(listaCpf) if i not in listaCpf[n + 1:]]
-         
+
         arquivo = open('lista-cpf-unicos.txt', 'w')
         for unico in lista_unica:
                 arquivo.write(unico + "\n")
-        
+
         arquivo.close()
-         
+
 
 cpfUnique()
